@@ -1,14 +1,10 @@
 package hello.spring.repository;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 import hello.spring.domain.Member;
 
-public class MemoryMemberRepository implements MemberReposiory{
+public class MemoryMemberRepository implements MemberRepository{
     
     private static Map<Long, Member> store = new HashMap<>();
     private static long sequence = 0L;
@@ -37,5 +33,9 @@ public class MemoryMemberRepository implements MemberReposiory{
         member.setId(++sequence);
         store.put(member.getId(), member);
         return member;
-    };
+    }
+
+    public void clearStore(){
+        store.clear();
+    }
 }
