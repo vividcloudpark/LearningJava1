@@ -10,13 +10,13 @@ import hello.spring.domain.Member;
 import hello.spring.repository.MemberRepository;
 import hello.spring.repository.MemoryMemberRepository;
 
-// @Serviceg
+@Service
 public class MemberService {
 
     private final MemberRepository memberRepository;
 
-    // @Autowired
-    public MemberService(MemoryMemberRepository memberRepository) {
+    @Autowired
+    public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
 
