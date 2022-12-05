@@ -3,42 +3,25 @@ package hello.spring.service;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.util.Optional;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import hello.spring.domain.Member;
-import hello.spring.repository.MemoryMemberRepository;
+import hello.spring.repository.MemberRepository;
 
-public class MemberServiceTest {
+@SpringBootTest
+@Transactional //테스트 실행시마다 롤백한다
 
-    MemberService memberService;
-    MemoryMemberRepository memberRepository;
-    private Optional<Member> findOne;
+public class MemberServiceIntegrationTest {
+
+    @Autowired MemberService memberService;
+    @Autowired MemberRepository memberRepository;
     
-    // // @BeforeEach
-    // // public void beforeEach(){
-    // //     memberRepository = new MemoryMemberRepository();
-    // //     MemberService memberService = new MemberService(memberRepository);
-    // //     //이런것이 바로 Di (Depency Injection)
-    // // }
-    
-    // @AfterEach
-    // public void afterEach(){
-    //     memberRepository.clearStore();
-    // }
 
-    @Test
-    void testFindMembers() {
-
-
-    }
-
-    @Test
-    void testFindOne() {
-
-    }
 
     @Test
     void 회원가입() {
@@ -67,15 +50,6 @@ public class MemberServiceTest {
         memberService.join(member1);
         IllegalStateException e = assertThrows(IllegalStateException.class, () -> memberService.join(member2));
         Assertions.assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다");
-
-        // try{
-        //     memberService.join(member2);
-        //     Fail();
-        // }catch (IllegalStateException e){
-        //     Assertions.assertThat(e.getMessage()).isEqualTo("이미 존재합니다");
-        // }
-        //then
-
         
     }
 }

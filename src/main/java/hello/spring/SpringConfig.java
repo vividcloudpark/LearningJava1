@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Configuration;
 
 import hello.spring.repository.JdbcMemberRepository;
 import hello.spring.repository.MemberRepository;
-import hello.spring.repository.MemoryMemberRepository;
 import hello.spring.service.MemberService;
 
 @Configuration
